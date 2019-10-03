@@ -67,9 +67,6 @@ class QrCodeCamera extends Component {
 const overlayColor = 'rgba(0,0,0,0.7)'; // this gives us a black color with a 50% transparency
 
 const rectDimensions = SCREEN_WIDTH * 0.62; // this is equivalent to 255 from a 393 device width
-const rectBorderWidth = SCREEN_WIDTH * 0.005; // this is equivalent to 2 from a 393 device width
-const rectBorderColor = '#50c96a';
-
 const scanBarWidth = SCREEN_WIDTH * 0.46; // this is equivalent to 180 from a 393 device width
 const scanBarHeight = SCREEN_WIDTH * 0.0025; //this is equivalent to 1 from a 393 device width
 const scanBarColor = '#22ff00';
