@@ -8,7 +8,7 @@ export default class App extends Component {
 	}
 
 	componentDidMount() {
-		return fetch('https://easybmtc.herokuapp.com/api/v1/busses/KA01FA0882')
+		return fetch('https://easybmtc.herokuapp.com/api/v1/busses/' + this.props.navigation.state.params.number)
 			.then((response) => response.json())
 			.then((responseJson) => {
 				this.setState({
