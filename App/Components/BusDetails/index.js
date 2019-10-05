@@ -13,7 +13,7 @@ export default class App extends Component {
 			.then((responseJson) => {
 				this.setState({
 					isLoading: false,
-					dataSource: responseJson
+					details: responseJson.data.bus
 				});
 			})
 			.catch((error) => {
@@ -31,7 +31,7 @@ export default class App extends Component {
 
 		return (
 			<View>
-				<Text> {this.state.dataSource.data.bus.busReg} </Text>
+				<Text> {this.state.details.busReg} </Text>
 			</View>
 		);
 	}
