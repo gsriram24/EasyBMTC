@@ -85,6 +85,7 @@ export default class App extends Component {
 						</View>
 					</CardView>
 				</View>
+				<View style={styles.footerContainer} />
 			</View>
 		);
 	}

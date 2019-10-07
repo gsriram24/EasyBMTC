@@ -46,5 +46,9 @@ export default StyleSheet.create({
 		marginTop: 40,
 		width: 350,
 		alignSelf: 'center'
+	},
+	footerContainer: {
+		flex: 0.8,
+		backgroundColor: 'blue'
 	}
 });
