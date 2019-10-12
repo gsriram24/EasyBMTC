@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { Text, View, ActivityIndicator, Alert, StatusBar } from 'react-native';
+import { Text, View, ActivityIndicator, Alert, StatusBar, TouchableOpacity } from 'react-native';
 import styles from './style.js';
 import ModalSelector from 'react-native-modal-selector';
 import CardView from 'react-native-cardview';
+import NumericInput from 'react-native-numeric-input';
+import LinearGradient from 'react-native-linear-gradient';
 
 export default class App extends Component {
 	constructor(props) {
@@ -84,8 +86,69 @@ export default class App extends Component {
 							/>
 						</View>
 					</CardView>
+					<CardView cardElevation={4} cardMaxElevation={7} cornerRadius={7} style={styles.card}>
+						<View style={styles.pickerBox}>
+							<Text style={{ color: '#bababa' }}>Adults</Text>
+							<NumericInput
+								type="up-down"
+								onChange={(value) => console.log(value)}
+								rounded
+								containerStyle={{ alignSelf: 'center' }}
+								minValue={0}
+								inputStyle={{ color: '#575757' }}
+							/>
+						</View>
+						<View
+							style={{
+								borderBottomColor: '#cacaca',
+								borderBottomWidth: 1
+							}}
+						/>
+						<View style={styles.pickerBox}>
+							<Text style={{ color: '#bababa' }}>Children</Text>
+							<NumericInput
+								type="up-down"
+								onChange={(value) => console.log(value)}
+								rounded
+								containerStyle={{ alignSelf: 'center' }}
+								minValue={0}
+								inputStyle={{ color: '#575757' }}
+							/>
+						</View>
+						<View
+							style={{
+								borderBottomColor: '#cacaca',
+								borderBottomWidth: 1
+							}}
+						/>
+						<View style={styles.pickerBox}>
+							<Text style={{ color: '#bababa' }}>Senior Citizens</Text>
+							<NumericInput
+								type="up-down"
+								onChange={(value) => console.log(value)}
+								rounded
+								containerStyle={{ alignSelf: 'center' }}
+								inputStyle={{ color: '#575757' }}
+								minValue={0}
+							/>
+						</View>
+					</CardView>
 				</View>
-				<View style={styles.footerContainer} />
+				<View style={styles.footerContainer}>
+					<TouchableOpacity style={styles.backButton}>
+						<Text style={styles.backText}>Back</Text>
+					</TouchableOpacity>
+					<LinearGradient
+						colors={[ '#50c96a', '#77e98f' ]}
+						start={{ x: 0, y: 0 }}
+						end={{ x: 1, y: 0 }}
+						style={styles.payButton}
+					>
+						<TouchableOpacity>
+							<Text style={styles.payText}>Pay {'\u20B9'}12</Text>
+						</TouchableOpacity>
+					</LinearGradient>
+				</View>
 			</View>
 		);
 	}

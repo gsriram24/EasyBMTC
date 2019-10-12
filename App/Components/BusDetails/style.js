@@ -49,6 +49,27 @@ export default StyleSheet.create({
 	},
 	footerContainer: {
 		flex: 0.8,
-		backgroundColor: 'blue'
+		flexDirection: 'row'
+	},
+	backButton: {
+		flex: 1,
+		alignItems: 'center'
+	},
+	payButton: {
+		flex: 1,
+		alignItems: 'center',
+		backgroundColor: '#cacaca'
+	},
+	backText: {
+		flex: 1,
+		textAlignVertical: 'center',
+		fontSize: 16,
+		color: '#575757'
+	},
+	payText: {
+		flex: 1,
+		textAlignVertical: 'center',
+		fontSize: 16,
+		color: '#fff'
 	}
 });
