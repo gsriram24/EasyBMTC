@@ -1,20 +1,20 @@
 import QRScreen from '../QRScreen';
 import BusTicketSwitchNavigator from '../Navigators/BusTicketSwitchNavigator';
-import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import {createSwitchNavigator, createAppContainer} from 'react-navigation';
 
 const AppNavigator = createSwitchNavigator({
-	BusTicketSwitchNavigator: {
-		screen: BusTicketSwitchNavigator,
-		navigationOptions: {
-			header: null
-		}
-	},
 	QRScreen: {
 		screen: QRScreen,
 		navigationOptions: {
-			header: null
-		}
-	}
+			header: null,
+		},
+	},
+	BusTicketSwitchNavigator: {
+		screen: BusTicketSwitchNavigator,
+		navigationOptions: {
+			header: null,
+		},
+	},
 });
 
 const QRSwitchNavigator = createAppContainer(AppNavigator);
