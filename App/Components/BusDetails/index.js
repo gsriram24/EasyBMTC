@@ -15,14 +15,17 @@ export default class App extends Component {
 			numberAdults: 0,
 			numberChildren: 0,
 			numberSC: 0,
-			fare: 0
+			fare: 0,
+			isGeneratingTicket: false
 		};
 	}
 
 	componentDidMount() {
 		StatusBar.setBarStyle('light-content', true);
 		StatusBar.setBackgroundColor('#50c96a');
-		return fetch('https://easybmtc.herokuapp.com/api/v1/busses/' + this.props.navigation.state.params.number)
+		return fetch(
+			'https://easybmtc.herokuapp.com/api/v1/busses/' + /*this.props.navigation.state.params.number*/ 'KA01FA0882'
+		)
 			.then((response) => response.json())
 			.then((responseJson) => {
 				this.setState({
@@ -257,8 +260,39 @@ export default class App extends Component {
 	goBack = () => {
 		this.props.navigation.navigate('QRScreen');
 	};
+	success = () => {
+		const stopsData = this.state.details.busStops.map((item, index) => {
+			return { key: index, label: item };
+		});
+		this.setState({ isGeneratingTicket: true });
+		fetch('https://easybmtc.herokuapp.com/api/v1/tickets', {
+			method: 'POST',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				busNo: this.state.details.busNo,
+				busReg: this.state.details.busReg,
+				from: this.state.details.busStops[this.state.from],
+				to: this.state.details.busStops[this.state.to],
+				numberAdults: this.state.numberAdults,
+				numberChildren: this.state.numberChildren,
+				numberSC: this.state.numberSC,
+				fare: this.calculateFare(),
+				txnId: 'abcd'
+			})
+		})
+			.then((response) => response.json())
+			.then((responseJson) => {
+				this.setState({ isGeneratingTicket: false });
+				this.props.navigation.navigate('TicketScreen', { responseJson: responseJson });
+			});
+
+		//this.setState({ txnId: data['txnId'] });
+	};
 	render() {
-		if (this.state.isLoading === true) {
+		if (this.state.isLoading === true || this.state.isGeneratingTicket === true) {
 			return (
 				<View style={styles.body}>
 					<ActivityIndicator color="#50c96a" size="large" style={styles.activityIndicator} />
@@ -363,10 +397,8 @@ export default class App extends Component {
 					</CardView>
 				</View>
 				<View style={styles.footerContainer}>
-					<TouchableOpacity style={styles.backButton}>
-						<Text style={styles.backText} onPress={this.goBack}>
-							Back
-						</Text>
+					<TouchableOpacity style={styles.backButton} onPress={this.goBack}>
+						<Text style={styles.backText}>Back</Text>
 					</TouchableOpacity>
 					<LinearGradient
 						colors={[ '#50c96a', '#77e98f' ]}
@@ -374,7 +406,7 @@ export default class App extends Component {
 						end={{ x: 1, y: 0 }}
 						style={styles.payButton}
 					>
-						<TouchableOpacity>
+						<TouchableOpacity onPress={this.success}>
 							<Text style={styles.payText}>
 								Pay {'\u20B9'}
 								{this.calculateFare()}
